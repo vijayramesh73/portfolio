@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>JavaScript Functions Demo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #d3cce3, #e9e4f0);
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    header {
+      background: #6a11cb;
+      background: linear-gradient(to right, #6a11cb, #2575fc);
+      color: white;
+      padding: 1.5em;
+      text-align: center;
+    }
+
+    main {
+      padding: 2em;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    section {
+      background: white;
+      border-radius: 10px;
+      padding: 1.5em;
+      margin-bottom: 2em;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    input, button {
+      padding: 0.5em;
+      margin-top: 0.5em;
+      font-size: 1em;
+    }
+
+    button {
+      background: #2575fc;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      margin-right: 0.5em;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #6a11cb;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1em;
+      background: #333;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>JavaScript Functions Showcase</h1>
+  </header>
+  <main>
+    <section id="greeting">
+      <h2>Greet the User</h2>
+      <input id="nameInput" type="text" placeholder="Enter your name" />
+      <button onclick="greetUser()">Greet Me</button>
+      <p id="greetMessage"></p>
+    </section>
+
+    <section id="clock">
+      <h2>Real-time Clock</h2>
+      <p id="timeDisplay"></p>
+    </section>
+
+    <section id="calculator">
+      <h2>Simple Calculator</h2>
+      <input id="num1" type="number" placeholder="Number 1" />
+      <input id="num2" type="number" placeholder="Number 2" />
+      <button onclick="calculate('add')">+</button>
+      <button onclick="calculate('subtract')">−</button>
+      <button onclick="calculate('multiply')">×</button>
+      <button onclick="calculate('divide')">÷</button>
+      <p id="calcResult"></p>
+    </section>
+
+    <section id="array">
+      <h2>Array Sorting</h2>
+      <p id="originalArray"></p>
+      <button onclick="sortArray()">Sort Numbers</button>
+      <p id="sortedArray"></p>
+    </section>
+
+    <section id="quote">
+      <h2>Random Quote Generator</h2>
+      <button onclick="generateQuote()">Get a Quote</button>
+      <p id="quoteDisplay"></p>
+    </section>
+  </main>
+  <footer>
+    <p>© 2025 Vijay Ramesh</p>
+  </footer>
+
+  <script>
+    // Greeting function
+    function greetUser() {
+      const name = document.getElementById('nameInput').value;
+      const message = `Hello, ${name || "stranger"}! Have a great day!`;
+      document.getElementById('greetMessage').textContent = message;
+    }
+
+    // Real-time clock
+    function updateTime() {
+      const now = new Date();
+      document.getElementById('timeDisplay').textContent = now.toLocaleTimeString();
+    }
+    setInterval(updateTime, 1000);
+
+    // Calculator function
+    function calculate(operation) {
+      const num1 = parseFloat(document.getElementById('num1').value);
+      const num2 = parseFloat(document.getElementById('num2').value);
+      let result;
+
+      if (isNaN(num1) || isNaN(num2)) {
+        result = 'Please enter valid numbers';
+      } else {
+        switch (operation) {
+          case 'add': result = num1 + num2; break;
+          case 'subtract': result = num1 - num2; break;
+          case 'multiply': result = num1 * num2; break;
+          case 'divide':
+            result = num2 !== 0 ? num1 / num2 : 'Cannot divide by zero';
+            break;
+        }
+      }
+
+      document.getElementById('calcResult').textContent = result;
+    }
+
+    // Array sorting
+    const numbers = [42, 7, 19, 73, 4, 88];
+    document.getElementById('originalArray').textContent = `Original: ${numbers.join(', ')}`;
+
+    function sortArray() {
+      const sorted = [...numbers].sort((a, b) => a - b);
+      document.getElementById('sortedArray').textContent = `Sorted: ${sorted.join(', ')}`;
+    }
+
+    // Quote generator
+    const quotes = [
+      "The best way to predict the future is to invent it.",
+      "Life is what happens when you're busy making other plans.",
+      "Do one thing every day that scares you.",
+      "Strive not to be a success, but rather to be of value.",
+      "Stay hungry, stay foolish."
+    ];
+
+    function generateQuote() {
+      const quote = quotes[Math.floor(Math.random() * quotes.length)];
+      document.getElementById('quoteDisplay').textContent = quote;
+    }
+  </script>
+</body>
+</html>
